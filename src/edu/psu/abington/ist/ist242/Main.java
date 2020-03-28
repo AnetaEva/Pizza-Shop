@@ -32,8 +32,35 @@ public class Main {
         char userAction;
 
         // CREATE INSTANCES OF EACH ARRAYLIST ---------------------------------------------------------------
-        // this will be imported from the customer class because of the same package
+        // this will be imported to the customer class because of the same package
         ArrayList<Customer> cList = new ArrayList<>(); // CUSTOMER ARRAYLIST
+
+
+
+
+
+
+        //----------------------------------------------------------------------------------------------------
+        ArrayList<Menu> mList = new ArrayList<>(); // MENUITEM ARRAYLIST
+
+        // CREATE DEFAULT CONSTRUCTORS OF EACH MENU AND ADD MENUID, ITEMNAME, PRICE
+        Menu menu1 = new Menu(1, "Plain", 11.99);
+        mList.add(menu1); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
+
+        Menu menu2 = new Menu(2, "Meat",  12.99);
+        mList.add(menu2); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
+
+        Menu menu3 = new Menu(3, "Extra", 14.99);
+        mList.add(menu3); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
+
+        Menu menu4 = new Menu(4, "Veg", 13.99);
+        mList.add(menu4); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
+
+
+
+
+
+
 
 
 
@@ -68,8 +95,23 @@ public class Main {
                     System.out.printf("%-10s | %-12s | %-10s\n", "ID", "Name", "Phone Number"); // i WANT THE INFO TO PRINT OUT HOW i HAVE IT IN THE PRINTCUSTOMER METHOD SO i HAVE TO INDICATE THAT HERE
                     Customer.printCustomer(cList);
                     break;
-                case MENU_CODE : //Menu.listMenu(mList);
+                case MENU_CODE :
+                    System.out.println("------------------------");
+                    System.out.println("     Pizza Shop Menu    ");
+                    System.out.println("------------------------");
+                    System.out.printf("%-1s | %-12s | %-12s\n", "ID", "Item", "Price");
+                    //Menu.listMenu(cList); I want my menu from above to print the ID, Item and Price but it will call the printMenuInfo method from MENU
+                    menu1.printMenuInfo(); // MENUID, ITEMNAME AND PRICE WILL PRINT
+                    menu2.printMenuInfo(); // MENUID, ITEMNAME AND PRICE WILL PRINT
+                    menu3.printMenuInfo(); // MENUID, ITEMNAME AND PRICE WILL PRINT
+                    menu4.printMenuInfo(); // MENUID, ITEMNAME AND PRICE WILL PRINT
                     break;
+
+
+
+
+
+
                 case ORDER_CODE : //Order.addOrders
                     break;
                 case TRAN_CODE: //Transaction.listTransactions(tList);
