@@ -65,7 +65,7 @@ public class Main {
                     System.out.println("-- Customer saved. Please choose next option. --");
                     break;
                 case CUST_PRNT: // PRINTS THE CUSTOMERS FROM CLIST, THAT YOU HAD ADDED
-                    System.out.printf("%-10s | %-12s | %-10s\n", "ID", "Name", "Phone Number");
+                    System.out.printf("%-10s | %-12s | %-10s\n", "ID", "Name", "Phone Number"); // i WANT THE INFO TO PRINT OUT HOW i HAVE IT IN THE PRINTCUSTOMER METHOD SO i HAVE TO INDICATE THAT HERE
                     Customer.printCustomer(cList);
                     break;
                 case MENU_CODE : //Menu.listMenu(mList);
