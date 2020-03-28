@@ -125,7 +125,6 @@ public class Order {
 
     public double getSubtotal(double price, double quantity) { // Subtotal is for when you order 1 item at a time, to get the subtotal you take the price * quantity so we need to indicate that in arguments
         double subTotal = price * quantity;
-        /*totalPrice = totalPrice + subTotal;*/
         return subTotal;
     }
 
