@@ -19,6 +19,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        double subTotal;
+        double orderTotal = 0;
+
         // CREATE A MAIN DEFAULT CONSTRUCTOR WITH NO ARGUMENTS
         Main main = new Main();
 
@@ -59,7 +62,12 @@ public class Main {
 
 
 
+        //-----------------------------------------------------------------------------------------------------
+        ArrayList<Order> oList = new ArrayList<>(); //ORDER ARRAYLIST
 
+        // CREATE A DEFAULT ORDER CONSTRUCTOR AND ADD THE ORDER ID INTO IT
+        Order order1 = new Order(1);
+        oList.add(order1);
 
 
 
@@ -106,14 +114,58 @@ public class Main {
                     menu3.printMenuInfo(); // MENUID, ITEMNAME AND PRICE WILL PRINT
                     menu4.printMenuInfo(); // MENUID, ITEMNAME AND PRICE WILL PRINT
                     break;
-
-
-
-
-
-
                 case ORDER_CODE : //Order.addOrders
-                    break;
+                    Order ord = new Order();
+                    System.out.println("-- ORDERING -- ");
+                    String userInput = "1 - Order\n2 - Exit ";
+                    userAction = getAction(userInput);
+                    while (userAction != '2') {
+                        Scanner input = new Scanner(System.in);
+                        System.out.printf("%-1s | %-12s | %-12s\n", "ID", "Item", "Price"); // when the customer is set to order first the menu will print out
+                        menu1.printMenuInfo();
+                        menu2.printMenuInfo();
+                        menu3.printMenuInfo();
+                        menu4.printMenuInfo();
+                        System.out.println(" ");
+                        System.out.println("Please enter the menu ID # you would like to order: ");
+                        int menuId = input.nextInt(); // takes the input and stores it in menuID
+                        System.out.println("Enter the quantity: ");
+                        int qty = input.nextInt(); //ord.getQuantity(); // takes the input qty and stores it in qty
+
+                        ord.setQuantity(qty); // qty is set in ORD
+
+                        oList.add(ord.order()); //adds the order to the order list
+
+                        switch (menuId) {
+                            case 1:
+                                subTotal = ord.getSubtotal(menu1.getPrice(), qty);
+                                orderTotal = orderTotal + subTotal;
+                                ord.printOrder(menu1.getMenuItem(), menu1.getPrice(), qty, subTotal); //to print the order its going to print the menuItem name, print the price of the menu item, print the input how many you wanted and print the subtotal / this calculation comes from the Order class (printOrder)
+                                userAction = getAction(userInput);
+                                break;
+                            case 2:
+                                subTotal = ord.getSubtotal(menu2.getPrice(), qty);
+                                orderTotal = orderTotal + subTotal;
+                                ord.printOrder(menu2.getMenuItem(), menu1.getPrice(), qty, subTotal);
+                                userAction = getAction(userInput);
+                                break;
+                            case 3:
+                                subTotal = ord.getSubtotal(menu3.getPrice(), qty);
+                                orderTotal = orderTotal + subTotal;
+                                ord.printOrder(menu3.getMenuItem(), menu3.getPrice(), qty, subTotal);
+                                userAction = getAction(userInput);
+                                break;
+                            case 4:
+                                subTotal = ord.getSubtotal(menu4.getPrice(), qty);
+                                orderTotal = orderTotal + subTotal;
+                                ord.printOrder(menu4.getMenuItem(), menu4.getPrice(), qty, subTotal);
+                                userAction = getAction(userInput);
+                                break;
+                            default:
+                                System.out.println("Error.");
+                                break;
+                        }
+                    }
                 case TRAN_CODE: //Transaction.listTransactions(tList);
                     break;
                 case HELP_CODE:
