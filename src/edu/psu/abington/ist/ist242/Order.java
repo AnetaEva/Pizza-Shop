@@ -141,7 +141,7 @@ public class Order {
     // PRINT ORDER DETAILS
     public static void listOrderDetails(ArrayList<Order> oList) { // listorderdetails takes the olist array as a parameter
         for (Order orderDetails : oList) { // olist array stored in orderdetails
-            System.out.println(orderDetails.getOrderId()); //print the orderdetails by orderid
+            System.out.println(orderDetails.getMenuItem());// getOrderId()); //print the orderdetails by orderid
         }
     }
 }

@@ -22,6 +22,7 @@ public class Main {
         double subTotal;
         double orderTotal = 0;
 
+
         // CREATE A MAIN DEFAULT CONSTRUCTOR WITH NO ARGUMENTS
         Main main = new Main();
 
@@ -43,6 +44,7 @@ public class Main {
 
 
 
+
         //----------------------------------------------------------------------------------------------------
         ArrayList<Menu> mList = new ArrayList<>(); // MENUITEM ARRAYLIST
 
@@ -50,7 +52,7 @@ public class Main {
         Menu menu1 = new Menu(1, "Plain", 11.99);
         mList.add(menu1); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
 
-        Menu menu2 = new Menu(2, "Meat",  12.99);
+        Menu menu2 = new Menu(2, "Meat", 12.99);
         mList.add(menu2); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
 
         Menu menu3 = new Menu(3, "Extra", 14.99);
@@ -67,16 +69,11 @@ public class Main {
 
         // CREATE A DEFAULT ORDER CONSTRUCTOR AND ADD THE ORDER ID INTO IT
         Order order1 = new Order(1);
-        oList.add(order1);
+        //oList.add(order1);
 
 
-
-
-
-
-
-
-
+        //-----------------------------------------------------------------------------------------------------
+        ArrayList<Transaction> tList = new ArrayList<>(); //TRANSACTION ARRAYLIST
 
 
         // ----------------------------------------------------------------------------------------------------
@@ -93,8 +90,8 @@ public class Main {
         userAction = getAction(PROMPT_ACTION);
 
         while (userAction != EXIT_CODE) {
-            switch(userAction) {
-                case CUST_CODE :
+            switch (userAction) {
+                case CUST_CODE:
                     cList.add(main.addCustomer()); // main object / addCustomer is in the main object so we are saying that do the addCustomer function from the main class and add it into the cList array
                     System.out.println(" ");
                     System.out.println("-- Customer saved. Please choose next option. --");
@@ -103,7 +100,7 @@ public class Main {
                     System.out.printf("%-10s | %-12s | %-10s\n", "ID", "Name", "Phone Number"); // i WANT THE INFO TO PRINT OUT HOW i HAVE IT IN THE PRINTCUSTOMER METHOD SO i HAVE TO INDICATE THAT HERE
                     Customer.printCustomer(cList);
                     break;
-                case MENU_CODE :
+                case MENU_CODE:
                     System.out.println("------------------------");
                     System.out.println("     Pizza Shop Menu    ");
                     System.out.println("------------------------");
@@ -114,9 +111,10 @@ public class Main {
                     menu3.printMenuInfo(); // MENUID, ITEMNAME AND PRICE WILL PRINT
                     menu4.printMenuInfo(); // MENUID, ITEMNAME AND PRICE WILL PRINT
                     break;
-                case ORDER_CODE : //Order.addOrders
+                case ORDER_CODE: //Order.addOrders
                     Order ord = new Order();
                     System.out.println("-- ORDERING -- ");
+                    System.out.println(" ");
                     String userInput = "1 - Order\n2 - Exit ";
                     userAction = getAction(userInput);
                     while (userAction != '2') {
@@ -127,12 +125,14 @@ public class Main {
                         menu3.printMenuInfo();
                         menu4.printMenuInfo();
                         System.out.println(" ");
+
                         System.out.println("Please enter the menu ID # you would like to order: ");
                         int menuId = input.nextInt(); // takes the input and stores it in menuID
+
                         System.out.println("Enter the quantity: ");
                         int qty = input.nextInt(); //ord.getQuantity(); // takes the input qty and stores it in qty
-
                         ord.setQuantity(qty); // qty is set in ORD
+
 
                         oList.add(ord.order()); //adds the order to the order list
 
@@ -146,7 +146,7 @@ public class Main {
                             case 2:
                                 subTotal = ord.getSubtotal(menu2.getPrice(), qty);
                                 orderTotal = orderTotal + subTotal;
-                                ord.printOrder(menu2.getMenuItem(), menu1.getPrice(), qty, subTotal);
+                                ord.printOrder(menu2.getMenuItem(), menu2.getPrice(), qty, subTotal);
                                 userAction = getAction(userInput);
                                 break;
                             case 3:
@@ -166,7 +166,27 @@ public class Main {
                                 break;
                         }
                     }
-                case TRAN_CODE: //Transaction.listTransactions(tList);
+                case TRAN_CODE:
+                    Transaction trans1 = new Transaction(1);
+                    tList.add(trans1);
+
+                    System.out.println("Your order total is: $ " + orderTotal);
+                    trans1.setPaymentType(trans1.selectPayType()); // enter the payment type either cash or credit
+
+                    System.out.println("---- Aneta's Pizza Shop ----");
+                    System.out.println("     1600 Woodland Road     ");
+                    System.out.println("     Abington, PA 19001     ");
+                    System.out.println("        215-555-1212        ");
+                    System.out.println("       -- RECEIPT --        ");
+
+                    trans1.listTransactions(tList);
+
+                    System.out.printf("%-10s | %-12s | %-10s\n", "ID", "Name", "Phone Number");
+                    Customer.printCustomer(cList);
+
+
+                    trans1.printReceipt(orderTotal, trans1.getPaymentType()); // goes to printReceipt method
+
                     break;
                 case HELP_CODE:
                     break;
@@ -176,26 +196,29 @@ public class Main {
     }
 
 
-    // METHOD TO GET USER CHOICE FOR MENU --------------------------------------------------------------------
-    public static char getAction(String prompt) {
-        Scanner scnr = new Scanner(System.in);
-        String answer = "";
-        System.out.println(prompt);
-        answer = scnr.nextLine().toUpperCase() + " ";
-        char firstChar = answer.charAt(0);
-        return firstChar;
-    }
+        // METHOD TO GET USER CHOICE FOR MENU --------------------------------------------------------------------
+        public static char getAction (String prompt){
+            Scanner scnr = new Scanner(System.in);
+            String answer = "";
+            System.out.println(prompt);
+            answer = scnr.nextLine().toUpperCase() + " ";
+            char firstChar = answer.charAt(0);
+            return firstChar;
+        }
 
-    // METHOD TO ADD CUSTOMERS --------------------------------------------------------------------------------
-    public Customer addCustomer(){
-        Customer cust = new Customer(cCount++); // create Customer object and add the cCount to increment each ID
-        Scanner scnr = new Scanner(System.in);
-        System.out.println("Please Enter your Name: ");
-        cust.setCustomerName(scnr.nextLine());
-        System.out.println("Please Enter your Phone: ");
-        cust.setCustomerPhoneNumber(scnr.nextLine());
-        return cust;
-    }
+        // METHOD TO ADD CUSTOMERS --------------------------------------------------------------------------------
+        public Customer addCustomer () {
+            Customer cust = new Customer(cCount++); // create Customer object and add the cCount to increment each ID
+            Scanner scnr = new Scanner(System.in);
+            System.out.println("Please Enter your Name: ");
+            cust.setCustomerName(scnr.nextLine());
+            System.out.println("Please Enter your Phone: ");
+            cust.setCustomerPhoneNumber(scnr.nextLine());
+            return cust;
+        }
+
+
+
 
 
 
