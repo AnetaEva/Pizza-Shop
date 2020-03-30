@@ -4,7 +4,7 @@ Purpose Details: Pizza ordering application
 Course: IST 242
 Author: Aneta O'Donnell
 Date Developed: 3/14/19
-Last Date Changed: 3/28/2020
+Last Date Changed: 3/29/2020
 Rev:
  */
 
@@ -49,16 +49,16 @@ public class Main {
         ArrayList<Menu> mList = new ArrayList<>(); // MENUITEM ARRAYLIST
 
         // CREATE DEFAULT CONSTRUCTORS OF EACH MENU AND ADD MENUID, ITEMNAME, PRICE
-        Menu menu1 = new Menu(1, "Plain", 11.99);
+        Menu menu1 = new Menu(1, "Plain Jane", 11.99);
         mList.add(menu1); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
 
-        Menu menu2 = new Menu(2, "Meat", 12.99);
+        Menu menu2 = new Menu(2, "Meat Lovers", 12.99);
         mList.add(menu2); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
 
-        Menu menu3 = new Menu(3, "Extra", 14.99);
+        Menu menu3 = new Menu(3, "Extra Cheese", 14.99);
         mList.add(menu3); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
 
-        Menu menu4 = new Menu(4, "Veg", 13.99);
+        Menu menu4 = new Menu(4, "Veggie", 13.99);
         mList.add(menu4); // ADD EACH MENU ITEMNAME, ID, PRICE TO THE ARRAYLIST
 
 
@@ -69,7 +69,7 @@ public class Main {
 
         // CREATE A DEFAULT ORDER CONSTRUCTOR AND ADD THE ORDER ID INTO IT
         Order order1 = new Order(1);
-        //oList.add(order1);
+        oList.add(order1);
 
 
         //-----------------------------------------------------------------------------------------------------
@@ -97,6 +97,10 @@ public class Main {
                     System.out.println("-- Customer saved. Please choose next option. --");
                     break;
                 case CUST_PRNT: // PRINTS THE CUSTOMERS FROM CLIST, THAT YOU HAD ADDED
+                    System.out.println("------------------------------------------------");
+                    System.out.println("                Aneta's Pizza Shop              ");
+                    System.out.println("                 -- CUSTOMERS --                ");
+                    System.out.println("------------------------------------------------");
                     System.out.printf("%-10s | %-12s | %-10s\n", "ID", "Name", "Phone Number"); // i WANT THE INFO TO PRINT OUT HOW i HAVE IT IN THE PRINTCUSTOMER METHOD SO i HAVE TO INDICATE THAT HERE
                     Customer.printCustomer(cList);
                     break;
@@ -113,11 +117,15 @@ public class Main {
                     break;
                 case ORDER_CODE: //Order.addOrders
                     Order ord = new Order();
-                    System.out.println("-- ORDERING -- ");
+                    System.out.println("-------------------------------------------");
+                    System.out.println("             Aneta's Pizza Shop            ");
+                    System.out.println("               -- ORDERING --              ");
+                    System.out.println("-------------------------------------------");
+                    System.out.println("Note: To keep adding more items select 'O'\nWhen finished select 'E' ");
                     System.out.println(" ");
-                    String userInput = "1 - Order\n2 - Exit ";
+                    String userInput = "O - Order\nE - Exit "; // want this in here so that user can order more items after selecting 1 item
                     userAction = getAction(userInput);
-                    while (userAction != '2') {
+                    while (userAction != 'E') {
                         Scanner input = new Scanner(System.in);
                         System.out.printf("%-1s | %-12s | %-12s\n", "ID", "Item", "Price"); // when the customer is set to order first the menu will print out
                         menu1.printMenuInfo();
@@ -140,7 +148,7 @@ public class Main {
                             case 1:
                                 subTotal = ord.getSubtotal(menu1.getPrice(), qty);
                                 orderTotal = orderTotal + subTotal;
-                                ord.printOrder(menu1.getMenuItem(), menu1.getPrice(), qty, subTotal); //to print the order its going to print the menuItem name, print the price of the menu item, print the input how many you wanted and print the subtotal / this calculation comes from the Order class (printOrder)
+                                ord.printOrder(menu1.getMenuItem(), menu1.getPrice(), qty, subTotal);//to print the order its going to print the menuItem name, print the price of the menu item, print the input how many you wanted and print the subtotal / this calculation comes from the Order class (printOrder)
                                 userAction = getAction(userInput);
                                 break;
                             case 2:
@@ -166,11 +174,12 @@ public class Main {
                                 break;
                         }
                     }
+                    break;
                 case TRAN_CODE:
                     Transaction trans1 = new Transaction(1);
                     tList.add(trans1);
 
-                    System.out.println("Your order total is: $ " + orderTotal);
+                    //System.out.println("Your order total w/o tax is: $ " + orderTotal);
                     trans1.setPaymentType(trans1.selectPayType()); // enter the payment type either cash or credit
 
                     System.out.println("---- Aneta's Pizza Shop ----");
@@ -184,12 +193,21 @@ public class Main {
                     System.out.printf("%-10s | %-12s | %-10s\n", "ID", "Name", "Phone Number");
                     Customer.printCustomer(cList);
 
+                    //Order.printOrder(order1.getMenuItem(), order1.getPrice());
+                    Order.listOrderDetails(oList); //
+                    //Menu.listMenu(mList);
 
                     trans1.printReceipt(orderTotal, trans1.getPaymentType()); // goes to printReceipt method
 
                     break;
                 case HELP_CODE:
                     break;
+                case EXIT_CODE:
+                    break;
+                default:
+                    System.out.println("Error");
+                    break;
+
             }
             userAction = getAction(PROMPT_ACTION);
         }

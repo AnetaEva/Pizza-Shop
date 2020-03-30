@@ -4,7 +4,7 @@ Purpose Details: Pizza ordering application
 Course: IST 242
 Author: Aneta O'Donnell
 Date Developed: 3/14/19
-Last Date Changed: 3/28/2020
+Last Date Changed: 3/29/2020
 Rev:
  */
 
@@ -58,7 +58,7 @@ public class Menu {
 
 
     // METHODS -----------------------------------------------------------------------------------------------------
-    public static void listMenu(ArrayList<Menu> mList){ // list menu method will be printed from MENU_CODE 'M' to call it Menu.listMenu
+    public static void listMenu(ArrayList<Menu> mList){
         for (Menu menu: mList){
             System.out.println(menu.getMenuItem());
         }

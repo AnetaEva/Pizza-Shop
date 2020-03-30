@@ -1,3 +1,13 @@
+/*
+Project: Lab 9
+Purpose Details: Pizza ordering application
+Course: IST 242
+Author: Aneta O'Donnell
+Date Developed: 3/14/19
+Last Date Changed: 3/29/2020
+Rev:
+ */
+
 package edu.psu.abington.ist.ist242;
 
 import java.util.ArrayList;
