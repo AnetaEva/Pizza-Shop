@@ -214,26 +214,26 @@ public class Main {
     }
 
 
-        // METHOD TO GET USER CHOICE FOR MENU --------------------------------------------------------------------
-        public static char getAction (String prompt){
-            Scanner scnr = new Scanner(System.in);
-            String answer = "";
-            System.out.println(prompt);
-            answer = scnr.nextLine().toUpperCase() + " ";
-            char firstChar = answer.charAt(0);
-            return firstChar;
-        }
+    // METHOD TO GET USER CHOICE FOR MENU --------------------------------------------------------------------
+    public static char getAction (String prompt){
+        Scanner scnr = new Scanner(System.in);
+        String answer = "";
+        System.out.println(prompt);
+        answer = scnr.nextLine().toUpperCase() + " ";
+        char firstChar = answer.charAt(0);
+        return firstChar;
+    }
 
-        // METHOD TO ADD CUSTOMERS --------------------------------------------------------------------------------
-        public Customer addCustomer () {
-            Customer cust = new Customer(cCount++); // create Customer object and add the cCount to increment each ID
-            Scanner scnr = new Scanner(System.in);
-            System.out.println("Please Enter your Name: ");
-            cust.setCustomerName(scnr.nextLine());
-            System.out.println("Please Enter your Phone: ");
-            cust.setCustomerPhoneNumber(scnr.nextLine());
-            return cust;
-        }
+    // METHOD TO ADD CUSTOMERS --------------------------------------------------------------------------------
+    public Customer addCustomer () {
+        Customer cust = new Customer(cCount++); // create Customer object and add the cCount to increment each ID
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("Please Enter your Name: ");
+        cust.setCustomerName(scnr.nextLine());
+        System.out.println("Please Enter your Phone: ");
+        cust.setCustomerPhoneNumber(scnr.nextLine());
+        return cust;
+    }
 
 
 

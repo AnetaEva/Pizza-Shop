@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Customer {
+public class Customer extends Order {
 
     // CLASS LEVEL VARIABLES - PROTECT THE DATA ---------------------------------------------------------------
     private int customerId;

@@ -86,6 +86,7 @@ public class Transaction extends Customer{
         System.out.printf("%-10s  %-10s", "Order         ", "$ ");
         System.out.printf("%.2f\n", orderTotal);
 
+
         //double total = orderTotal + orderTotal * tax;
 
         System.out.printf("%-10s  %-10s", "Tax           ", "$ ");
